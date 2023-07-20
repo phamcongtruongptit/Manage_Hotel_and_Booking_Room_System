@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate= "~{Manager/fragment/Manager-dashBoardLayout.html}" >
+
+<head>
+
+</head>
+
+  <body>
+      
+    <main class="container mt-2" layout:fragment="content">
+        <header class="row text-center"></header>
+        <section class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                      <div class="row d-flex justify-content-between">
+
+                        <div class="ml-3">
+                          <h5>View Static</h5>
+                        </div>
+                        <div class="row">
+                          <!-- <strong th:text="'User: ' + ${session.userLogined.fullname}" class="btn mr-2"></strong> -->
+                          <!-- <strong th:text="'Position: ' + ${session.userLogined.position}" class="btn mr-2"></strong> -->
+                          <!-- <a href="/manager" class="btn btn-light">Home</a> -->
+                          <!-- <form action="/logout" method="post">
+                              <button class="btn btn-light float-right mr-5">Logout</button>
+                          </form> -->
+                      </div>
+                        
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="row mt-2 mb-2">
+                        <div class="col">
+                            <form action="" method="get">
+                                <div class="form-inline float-left">
+                                    <label for="">Start Date: </label>
+                                    <input required name="startDate" type="date" class="form-control ml-2" aria-describedby="helpId" th:value="${startDate}" >
+                                    <label for="" class="ml-5">End Date: </label>
+                                    <input  required name="endDate" type="date" class="form-control ml-2" aria-describedby="helpId" th:value="${endDate}" >
+                                    <button class="btn btn-outline-primary ml-5">View Static</button>
+                                </div>
+                            </form>
+                            
+                        </div>
+                      </div>
+
+
+                        <table class="table table-hover table-inverse">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th class="">RoomID</th>
+                                        <th class="">Name</th>
+                                        <th class="">Type</th>
+                                        <th class="">Total Filled days</th>
+                                        <th class="">Total revenue</th>
+                                        <th class=""></th>
+                                    </tr> 
+                                </thead>
+                                 <tbody>
+                                        <tr  th:each=" roomSta : ${listRoomstas}" >
+                                            <td th:text="${roomSta.id}" class=""> 36356 </td>
+                                            <td th:text="${roomSta.name}" class=""> 363 </td>
+                                            <td th:text="${roomSta.type}" class=""> 363 </td>
+                                            <td th:text="${roomSta.filledDays}" class=""> 3635 </td>
+                                            <td th:text="${roomSta.income}" class=""> 3635 </td>
+                                            <td>
+                                              <form th:action="@{/manager/viewStatic/room}" method="post">
+                                                <input hidden type="number" th:value="${roomSta.id}" name = "roomId">
+                                                <input hidden type="date" th:value="${startDate}" name  = "startDate">
+                                                <input  hidden type="date" th:value="${endDate}"  name = "endDate">
+                                                <button class="btn btn-outline-success">View Detail</button>
+                                              </form>
+                                            </td>
+                                        </tr>
+                                        
+                                </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <footer class="row"></footer>
+      </main>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

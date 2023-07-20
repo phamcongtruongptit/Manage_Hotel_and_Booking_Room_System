@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+</head>
+
+<body>
+  <div th:fragment="nav">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <!-- <a class="navbar-brand" href="#">Asignmetnt Java 5</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button> -->
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="/home"> <i class="fa fa-home" aria-hidden="true"></i> Home System <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/manager"> <i class="fas fa-book mr-1"></i> Go To Manager Page </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/seller"> <i class="fa fa-cart-arrow-down mr-1" aria-hidden="true"></i> Go To Seller Page </a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false"><i class="fa fa-key" aria-hidden="true"></i> My Account</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a sec:authorize="isAnonymous()" class="dropdown-item" href="/login">Login</a>
+              <a sec:authorize="isAnonymous()" class="dropdown-item" href="">Forgot Password</a>
+              <a sec:authorize="isAuthenticated()" class="dropdown-item" href="">Change Password</a>
+              <a sec:authorize="isAuthenticated()" class="dropdown-item" href="">Edit Profile</a>
+              <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <button class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</button>
+              </form>
+            </div>
+          </li>
+
+        </ul>
+
+        <!-- <form class="form-inline my-2 my-lg-0">
+          <div th:if="${session.usernameLogined != null}" >
+            <span th:text="${#authentication.getPrincipal().getUsername()}" ></span> -->
+            <!-- <span th:text ="${#authentication.getPrincipal().getUser().getUsername()}"></span>
+          </div>
+        </form> -->
+        <form class="form-inline my-2 my-lg-0">
+          <div th:if="${session.usernameLogined!=null}" class="font-weight-bold" 
+          th:text="'Hello: ' + ${session.usernameLogined}" style="color: white;">Pham
+            cong truong</div>
+        </form>
+        
+      </div>
+    </nav>
+  </div>
+</body>

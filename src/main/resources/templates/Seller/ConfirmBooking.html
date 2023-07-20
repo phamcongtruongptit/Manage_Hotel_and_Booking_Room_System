@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate= "~{Seller/fragment/seller-dashBoardLayout.html}" >
+
+<head>
+
+</head>
+
+<body>
+
+    <main class="container mt-2" layout:fragment="content">
+        <form th:action="@{/seller/booking/save}" method="post" th:object="${bookingDTO}">
+            <header class="row text-center"></header>
+            <section class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row d-flex justify-content-between">
+                                <div class="ml-3">
+                                    <h5>Confirm</h5>
+                                </div>
+                                <div class="row">
+                                <!-- <strong th:text="'User: ' + ${session.userLogined.fullname}" class="btn mr-2"></strong>
+                                <strong th:text="'Position: ' + ${session.userLogined.position}" class="btn mr-2"></strong> -->
+                                    <!-- <a href="/seller" class="btn btn-light">Home</a> -->
+                                    <!-- <form action="/logout" method="post">
+                                        <button class="btn btn-light float-right mr-5">Logout</button>
+                                    </form> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mt-2 mb-2">
+                                <div class="col">
+                                    <div class="form-inline float-left">
+                                        <label for="">Client Name: </label>
+                                        <input type="text" class="form-control ml-2" aria-describedby="helpId" th:field="*{clientName}" readonly >
+
+                                        <label for="" class="ml-5">Tel: </label>
+                                        <input type="text" class="form-control ml-2" aria-describedby="helpId"  th:field="*{Tel}" readonly >
+
+                                        <label for="" class="ml-5">Booking Date: </label>
+                                        <input type="date" class="form-control ml-2" aria-describedby="helpId"
+                                          th:field="*{bookingDate}" readonly>
+                                        <input type="number" hidden th:field="*{clientID}">
+                                        <input type="number" hidden th:field="*{userID}">
+                                        <input type="date" hidden th:field="*{bookingDate}">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="card-header">
+                                <div class="row d-flex justify-content-between">
+                                    <div class="ml-3">
+                                        <h5>Booked Room</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-hover table-inverse">
+                                <thead class="thead-inverse">
+                                    <tr>
+                                        <th class="">Room ID</th>
+                                        <th class="">Name Of Room</th>
+                                        <th class="">Price($)</th>
+                                        <th class="">Check In</th>
+                                        <th class="">Check Out</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+    
+                                    <tr  th:each=" roombooked : ${session.listBookedRooms}" >
+                                        <td th:text="${roombooked.roomID}" class="">346 36 </td>
+                                        <td th:text="${roombooked.nameRoom}" class=""> 36356 </td>
+                                        <td th:text="${roombooked.price}" class=""> 363 </td>
+                                        <td th:text="${roombooked.checkin}" class=""> 3635 </td>
+                                        <td th:text="${roombooked.checkout}" class=""> 3635 </td>
+                                    </tr>
+    
+                                </tbody>
+                            </table>
+
+
+                            <div class="card-footer text-muted ">
+                                <button class="btn btn-info float-right "> <i class="fa fa-sign-in"
+                                        aria-hidden="true"></i>Confirm Booking</button> &nbsp;
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <footer class="row"></footer>
+        </form>
+    </main>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

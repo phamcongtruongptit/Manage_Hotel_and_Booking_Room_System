@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{Manager/fragment/Manager-dashBoardLayout.html}">
+
+<head>
+
+</head>
+
+<body>
+
+  <main class="container mt-2" layout:fragment="content">
+    <header class="row text-center"></header>
+    <section class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            <div class="row d-flex justify-content-between">
+
+              <div class="ml-3">
+                <h5>List Rooms</h5>
+              </div>
+              <div class="row">
+                <!-- <strong th:text="'User: ' + ${session.userLogined.fullname}" class="btn mr-2"></strong>
+                          <strong th:text="'Position: ' + ${session.userLogined.position}" class="btn mr-2"></strong> -->
+                <!-- <a href="/manager" class="btn btn-light">Home</a> -->
+                <!-- <form action="/logout" method="post">
+                              <button class="btn btn-light float-right mr-5">Logout</button>
+                          </form> -->
+              </div>
+
+
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row mt-2 mb-2">
+              <div class="col">
+
+                <form th:action="@{'/manager/rooms/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"  >
+                            <div class="form-inline float-left">
+                              <input hidden type="text" class="form-control ml-2" name="sortField" id="key" aria-describedby="helpId" th:value="${sortField}" >  
+                              <input hidden type="text" class="form-control ml-2" name="sortDir" id="key" aria-describedby="helpId" th:value="${sortDir}" >  
+                              <input type="text" class="form-control ml-2" name="search" id="search" aria-describedby="helpId" th:value="${search}" >  
+                              <button class="btn btn-outline-primary ml-2"> Search</button>
+                            </div>
+                          </form>
+
+                <div class="float-right">
+                  <a href="/manager/rooms/add" class="btn btn-success"><strong>Add New Room</strong></a>
+                </div>
+              </div>
+
+
+            </div>
+            <!-- <div class="row" th:if="${message!=null}">
+                        <div class="mb-1 col">
+                            
+                          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <strong th:text="${message}"></strong> 
+                          </div>
+                          
+                          <script>
+                            $(".alert").alert();
+                          </script>
+                            
+                        </div> 
+                      </div> -->
+
+            <table class="table table-hover table-inverse">
+              <thead class="thead-inverse">
+                <tr>
+                  <!-- <th> </th>
+                                        <th>Image</th> -->
+                  <!-- <th class="col-1">Book ID</th> -->
+                  <th class="">
+                    <a th:if="${search!=null}" th:href="@{'/manager/rooms/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + '&search=' + ${search} }">ID</a>
+                    <a  th:if="${search==null}" th:href="@{'/manager/rooms/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}  }">ID</a>
+                  </th>
+                  <th class="">
+                    <a th:if="${search!=null}" th:href="@{'/manager/rooms/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir} + '&search=' + ${search} }">Name</a>
+                    <a th:if="${search==null}" th:href="@{'/manager/rooms/page/' + ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir} }">Name</a>
+                  </th>
+                  <!-- <th class="">Description</th> -->
+                  <th class="">
+                    <a th:if="${search!=null}" th:href="@{'/manager/rooms/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir} + '&search=' + ${search} }">Price($)</a>
+                    <a th:if="${search==null}" th:href="@{'/manager/rooms/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}  }">Price($)</a>
+                  </th>
+                  <th class="">
+                    <a th:if="${search!=null}" th:href="@{'/manager/rooms/page/' + ${currentPage} + '?sortField=type&sortDir=' + ${reverseSortDir} + '&search=' + ${search} }">Type</a>
+                    <a th:if="${search==null}" th:href="@{'/manager/rooms/page/' + ${currentPage} + '?sortField=type&sortDir=' + ${reverseSortDir} }">Type</a>
+                  </th>
+                  <th class="" hidden >Description</th>
+                  <!-- <th >Action</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:onclick="'window.location.href=\'/manager/rooms/edit/' + ${room.id} + '\''"
+                  th:each=" room : ${rooms}">
+                  <td th:text="${room.id}" class="">346 36 </td>
+                  <td th:text="${room.name}" class=""> 36356 </td>
+                  <td th:text="${room.price}" class=""> 363 </td>
+                  <td th:text="${room.type}" class=""> 363 </td>
+                  <td th:text="${room.description}" hidden class=""> 3635 </td>
+
+                  <!-- <td  >
+                                              <div class="row">
+                                                <a th:href="" class="btn btn-outline-secondary"><i class="fa fa-info-circle" aria-hidden="true"></i>Edit</a> &nbsp;
+                                                <a th:data-id="${book.bookId}"  th:data-title="${book.title}"
+                                                onclick="showConfirm(this.getAttribute('data-id'),this.getAttribute('data-title'))"
+                                                 class="btn btn-outline-danger"><i class="fas fa-recycle"></i> Delete</a>
+                                              </div>
+                                            </td> -->
+                  <!-- th:href="'/admin/books/delete/'+${book.bookId}"  -->
+                </tr>
+
+              </tbody>
+
+
+
+            </table>
+
+            <div class="row d-flex justify-content-center mt-5">
+
+              <div th:if="${totalPages > 1  }">
+                <a th:if="${currentPage > 1 && search!=null}" 
+                  th:href="@{'/manager/rooms/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&search=' + ${search} }">First</a>
+                <a th:if="${currentPage > 1 && search==null }" 
+                  th:href="@{'/manager/rooms/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}  }">First</a>
+                <span th:unless="${currentPage > 1}">First</span>
+                &nbsp;&nbsp;
+
+                <a th:if="${currentPage > 1 && search!=null}"
+                  th:href="@{'/manager/rooms/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&search=' + ${search} }">Previous</a>
+                <a th:if="${currentPage > 1 && search==null }"
+                  th:href="@{'/manager/rooms/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}  }">Previous</a>
+                <span th:unless="${currentPage > 1}">Previous</span>
+
+                &nbsp;&nbsp;
+
+                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                  <a th:if="${currentPage != i && search!=null}"
+                    th:href="@{'/manager/rooms/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&search=' + ${search} }">[[${i}]]</a>
+                  <a th:if="${currentPage != i && search==null }"
+                    th:href="@{'/manager/rooms/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}  }">[[${i}]]</a>
+                  <span th:unless="${currentPage != i}">[[${i}]]</span>
+                  &nbsp;
+                </span>
+
+                <a th:if="${currentPage < totalPages && search!=null}"
+                  th:href="@{'/manager/rooms/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&search=' + ${search} }">Next</a>
+                <a th:if="${currentPage < totalPages && search==null }"
+                  th:href="@{'/manager/rooms/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}  }">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+                &nbsp;&nbsp;
+
+                <a th:if="${currentPage < totalPages && search!=null}"
+                  th:href="@{'/manager/rooms/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&search=' + ${search} }">Last</a>
+                <a th:if="${currentPage < totalPages && search==null }"
+                  th:href="@{'/manager/rooms/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}  }">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+                </ul>
+
+
+              </div>
+
+
+              <script>
+                function showConfirm(id, value) {
+                  $('#title').text(value);
+                  $('#yesOption').attr('href', '/admin/books/delete/' + id);
+                  $('#ConfirmationId').modal('show');
+                }
+              </script>
+              <!-- Button trigger modal -->
+              <!-- Modal -->
+              <div class="modal fade" id="ConfirmationId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Confirmation</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Do you want to delete "<span id="title"></span>" ?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                      <a id="yesOption" type="button" class="btn btn-danger">Yes</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+    </section>
+    <footer class="row"></footer>
+  </main>
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

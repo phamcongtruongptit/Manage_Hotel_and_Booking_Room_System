@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate= "~{Manager/fragment/Manager-dashBoardLayout.html}" >
+
+<head>
+
+</head>
+<body>      
+    <main class="vh-100" layout:fragment="content">
+      <section class="d-flex align-items-center justify-content-center h-100">
+              <div class="col-5">
+                  <form  th:action="@{/manager/users/add}" method="post" th:object="${userDTO}">
+                      <div class="card">
+                          <div class="card-header">
+                              <i class="fas fa-registered  "></i>
+                              <b>Add User  </b>  
+                          </div>
+                          <div class="card-body">
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                  <label for="fullname">Fullname  <b style="color: red;">*</b> : </label>
+                                  <input th:field="*{fullname}" type="text" class="form-control" name="fullname" id="fullname" aria-describedby="helpId" placeholder="" required>
+                                  <input type="text" hidden th:field="*{id}">
+                                  <input type="text" hidden th:field="*{username}">
+                                  <small id="helpId" class="form-text text-muted"></small>
+                                </div>
+    
+                                <div class="form-group col-6">
+                                  <label for="email">Email <b style="color: red;">*</b> :</label>
+                                  <input th:field="*{email}" type="email" class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="" required> 
+                                  <small id="helpId" class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                            
+                            <div class="row"> 
+                                <div class="form-group col">
+                                  <div class="row ">
+                                    <label for="" class="ml-3 ">Role: </label>
+                                    <div class="ml-3"> 
+                                      <input th:field="*{manager}" type="checkbox" name="isManager" id="isManager" class="" placeholder="" aria-describedby="helpId">
+                                      <label for="">Manager</label>
+                                    </div>
+                                    <div class="ml-3"> 
+                                      <input th:field="*{seller}" type="checkbox" name="" id="" class="" placeholder="" aria-describedby="helpId">
+                                      <label for="">Seller</label>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+
+                          </div>
+                          <div class="card-footer text-muted ">
+                              <button class="btn btn-primary ">Add User</button> &nbsp;  
+                          </div>
+                      </div>
+                  </form>
+              </div>
+      </section>
+     
+    </main>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>

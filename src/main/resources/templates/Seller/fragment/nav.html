@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+</head>
+
+<body>
+  <div th:fragment="nav">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <!-- <a class="navbar-brand" href="#">Asignmetnt Java 5</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button> -->
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="/seller"> <i class="fa fa-home" aria-hidden="true"></i> Home Seller <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/seller/booking"> <i class="fas fa-book    "></i> Booking Room</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/seller/history"> <i class="fas fa-book"></i>History</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="/admin/orders"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Manage Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/manageAdmin"> <i class="fa fa-adjust" aria-hidden="true"></i> Manage Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/manageUser"><i class="fa fa-user" aria-hidden="true"></i> Manage User</a>
+          </li> -->
+
+
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false"><i class="fa fa-key" aria-hidden="true"></i> My Account</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a sec:authorize="isAnonymous()" class="dropdown-item" href="/login">Login</a>
+              <a sec:authorize="isAnonymous()" class="dropdown-item" href="">Forgot Password</a>
+              <a sec:authorize="isAuthenticated()" class="dropdown-item" href="">Change Password</a>
+              <a sec:authorize="isAuthenticated()" class="dropdown-item" href="">Edit Profile</a>
+              <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+                <button class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</button>
+              </form>
+            </div>
+          </li>
+
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+          <div th:if="${session.usernameLogined!=null}" class="font-weight-bold" 
+          th:text="'Hello: ' + ${session.usernameLogined}" >Pham
+            cong truong</div>
+        </form>
+        
+      </div>
+    </nav>
+  </div>
+</body>

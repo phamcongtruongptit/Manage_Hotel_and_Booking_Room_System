@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate= "~{Seller/fragment/seller-dashBoardLayout.html}" >
+
+<head>
+
+</head>
+
+<body>
+
+    <main class="container mt-2" layout:fragment="content">
+        <header class="row text-center"></header>
+        <section class="row">
+            <div class="col">
+                <div class="card">
+
+                    
+
+                    <div class="card-header">
+                        <div class="row d-flex justify-content-between">
+                            <div class="ml-3">  
+                                <h5>Search Free Rooms</h5>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="card-body">
+                        <div class="row mt-2 mb-2">
+                            <div class="col">
+                                <form th:action="@{/seller/booking}">
+                                    <div class="form-inline float-left">
+
+                                        <label for="">Check In: </label>
+                                        <input required name="checkIn" type="date" class="form-control ml-2" aria-describedby="helpId" th:value="${session.checkIn}" >
+
+                                        <label for="" class="ml-5">Check out: </label>
+                                        <input  required name="checkOut" type="date" class="form-control ml-2" aria-describedby="helpId" th:value="${session.checkOut}" >
+                                        <button class="btn btn-outline-primary ml-5">Search Free Room</button>
+                                    </div>
+                                </form>
+                                
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="card-header">
+                            <div class="row d-flex justify-content-between">
+                                <div class="ml-3">
+                                    <h5>Free Rooms</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-hover table-inverse">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th class="">ID</th>
+                                    <th class="">Name</th>
+                                    <th class="">Price($)</th>
+                                    <th class="">Type</th>
+                                    <th class="">Description</th>
+                                    <th class=""></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each=" room : ${freeRooms}" >
+                                    
+                                    <td th:text="${room.id}" class="">346 36 </td>
+                                    <td th:text="${room.name}" class=""> 36356 </td>
+                                    <td th:text="${room.price}" class=""> 363 </td>
+                                    <td th:text="${room.type}" class=""> 363 </td>
+                                    <td th:text="${room.description}" class=""> 3635 </td>
+                                    <td>
+                                        <form th:action="@{/seller/booking}" method="post" >
+                                            <input type="number" hidden name = "roomID"  th:value="${room.id}">
+                                            <input type="number" hidden name = "priceRoom"  th:value="${room.price}">
+                                            <input type="text" hidden name = "nameRoom"  th:value="${room.name}">
+                                            <input type="date" hidden name = "checkIn"  th:value="${session.checkIn}">
+                                            <input type="date" hidden name = "checkOut" th:value="${session.checkOut}">
+                                            <td> <button class="btn btn-success">Book This Room</button> </td>
+                                        </form>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div class="card-header mt-5">
+                            <div class="row d-flex justify-content-between">
+                                <div class="ml-3">
+                                    <h5>Booked Rooms</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-hover table-inverse">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th class="">Room ID</th>
+                                    <th class="">Name Of Room</th>
+                                    <th class="">Price($)</th>
+                                    <th class="">Check In</th>
+                                    <th class="">Check Out</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr  th:each=" roombooked : ${listBookedRooms}" >
+                                    <td th:text="${roombooked.roomID}" class="">346 36 </td>
+                                    <td th:text="${roombooked.nameRoom}" class=""> 36356 </td>
+                                    <td th:text="${roombooked.price}" class=""> 363 </td>
+                                    <td th:text="${roombooked.checkin}" class=""> 3635 </td>
+                                    <td th:text="${roombooked.checkout}" class=""> 3635 </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class=" ">
+                            <form th:action="@{/seller/booking/refresh}" method="post">
+                                <button class="btn btn-outline-danger float-left">Reset</button>
+                            </form>
+                            <a href="/seller/booking/chooseClient" class="btn btn-info float-right "> <i class="fa fa-sign-in" aria-hidden="true"></i>Booking</a> &nbsp;
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <footer class="row"></footer>
+    </main>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
